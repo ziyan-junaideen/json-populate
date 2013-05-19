@@ -29,10 +29,10 @@ do ($ = jQuery, window, document) ->
 			# Place initialization logic here
 			# You already have access to the DOM element and the options via the instance,
 			# e.g., @element and @options
-			console.log("JSON Populate")
+			#console.log("JSON Populate")
 			# src  = @getSrc()
 			data = @getData(@options.url)
-			console.log data
+			#console.log data
 			return
 
 		getData: (src) ->
@@ -51,11 +51,48 @@ do ($ = jQuery, window, document) ->
 		# Given JSON Array of Data it will create select options values 
 		# and insert them to the div
 		setData: (t, data) ->
+
+			# initilising the string to empty
+			str = ""
+
 			for key, value of data
-				if value.id - t.options.default == 0
-					str = "#{str}<option value=\"#{value.id}\" selected=\"selected\">#{value.description}</option>"	
+
+				# We need to check if it is an array
+				if t.options.default instanceof Array
+					# default variable is an array
+					
+					###
+					if console.log 
+						console.log 'Found Array'
+						console.log t.options.default
+					###
+
+					# variable to record it the current item was found
+					found = false
+
+					# iterating through the defaults to see if the given
+					# item matches any o the default variables
+					for key, item of t.options.default
+						# console.log "#{item} - #{value.id}"
+						# checking for equality - simply using == seemd to have issues.
+						if item - value.id == 0
+							found = true
+
+					# dealing with the response		
+					if found == true
+						# Adding the element as a selected option
+						str = "#{str}<option value=\"#{value.id}\" selected=\"selected\">#{value.description}</option>"		
+					else
+						# Adding teh element as an ordinary option
+						str = "#{str}<option value=\"#{value.id}\">#{value.description}</option>"
+
 				else
-					str = "#{str}<option value=\"#{value.id}\">#{value.description}</option>"
+					# The defaults instance is not an array
+					# We can work as usual
+					if value.id - t.options.default == 0
+						str = "#{str}<option value=\"#{value.id}\" selected=\"selected\">#{value.description}</option>"	
+					else
+						str = "#{str}<option value=\"#{value.id}\">#{value.description}</option>"
 			$(t.element).html str
 			return
 
