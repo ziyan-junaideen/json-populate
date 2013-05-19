@@ -1,0 +1,30 @@
+{
+	"name": "json-populate",
+	"title": "jQuery JSON Populate",
+	"description": "A jump-start for jQuery plugins development.",
+	"keywords": [
+		"jquery",
+		"json",
+		"plugins",
+		"sri lanka"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Ziyan Junaideen",
+		"email": "jdeen-solutions@outlook.com",
+		"url": "https://www.jdeen.com"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://zenorocha.mit-license.org/"
+		}
+	],
+	"bugs": "https://github.com/ziyan-junaideen/json-populate/issues",
+	"homepage": "www.jdeen.com",
+	"docs": "https://github.com/ziyan-junaideen/json-populate/blob/master/README.md",
+	"download": "https://github.com/ziyan-junaideen/json-populate/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.4"
+	}
+}
