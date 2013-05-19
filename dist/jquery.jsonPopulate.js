@@ -20,9 +20,7 @@
 
       Plugin.prototype.init = function() {
         var data;
-        console.log("JSON Populate");
         data = this.getData(this.options.url);
-        console.log(data);
       };
 
       Plugin.prototype.getData = function(src) {
@@ -41,13 +39,36 @@
       };
 
       Plugin.prototype.setData = function(t, data) {
-        var key, str, value;
+        var found, item, key, str, value, _ref;
+        str = "";
         for (key in data) {
           value = data[key];
-          if (value.id - t.options["default"] === 0) {
-            str = "" + str + "<option value=\"" + value.id + "\" selected=\"selected\">" + value.description + "</option>";
+          if (t.options["default"] instanceof Array) {
+            /*
+            					if console.log 
+            						console.log 'Found Array'
+            						console.log t.options.default
+            */
+
+            found = false;
+            _ref = t.options["default"];
+            for (key in _ref) {
+              item = _ref[key];
+              if (item - value.id === 0) {
+                found = true;
+              }
+            }
+            if (found === true) {
+              str = "" + str + "<option value=\"" + value.id + "\" selected=\"selected\">" + value.description + "</option>";
+            } else {
+              str = "" + str + "<option value=\"" + value.id + "\">" + value.description + "</option>";
+            }
           } else {
-            str = "" + str + "<option value=\"" + value.id + "\">" + value.description + "</option>";
+            if (value.id - t.options["default"] === 0) {
+              str = "" + str + "<option value=\"" + value.id + "\" selected=\"selected\">" + value.description + "</option>";
+            } else {
+              str = "" + str + "<option value=\"" + value.id + "\">" + value.description + "</option>";
+            }
           }
         }
         $(t.element).html(str);
