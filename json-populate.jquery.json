@@ -1,7 +1,7 @@
 {
 	"name": "json-populate",
 	"title": "jQuery JSON Populate",
-	"description": "A jump-start for jQuery plugins development.",
+	"description": "Populate lists (dropdown and multiple select lists)",
 	"keywords": [
 		"jquery",
 		"json",
